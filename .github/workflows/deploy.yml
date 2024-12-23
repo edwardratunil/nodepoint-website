@@ -38,4 +38,4 @@ jobs:
           password: ${{ secrets.PASSWORD }}
           port: 21
           local-dir: build/           # Note the trailing slash
-          server-dir: public_html/
+          server-dir: public_html/coshare
