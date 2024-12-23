@@ -29,7 +29,7 @@ jobs:
         run: |
           npm run build
           ls -al build/
-          
+
       # 5. Deploy the build folder via FTP
       - name: FTP Deploy
         uses: SamKirkland/FTP-Deploy-Action@4.3.3
@@ -41,3 +41,4 @@ jobs:
           port: 21
           local-dir: build/           # Ensure this points to the generated build folder
           server-dir: public_html/    # Ensure this matches the correct server directory
+          dangerous-clean-slate: true
