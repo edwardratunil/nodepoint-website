@@ -3,7 +3,7 @@ name: Deploy React App to Hostinger
 on:
   push:
     branches:
-      - master  # Replace with your branch name if different
+      - master  # Adjust if your branch name is different
 
 jobs:
   build-and-deploy:
@@ -26,7 +26,9 @@ jobs:
 
       # 4. Build the React app
       - name: Build the React app
-        run: npm run build
+        run: |
+          npm run build
+          ls -al build/  # Debug: Check if the build folder exists and contains files
 
       # 5. Deploy the build folder via FTP
       - name: FTP Deploy
@@ -37,5 +39,5 @@ jobs:
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
           port: 21
-          local-dir: build/           # Note the trailing slash
-          server-dir: public_html/coshare/
+          local-dir: build/           # Ensure this points to the generated build folder
+          server-dir: public_html/    # Ensure this matches the correct server directory
