@@ -1,41 +1,39 @@
 name: Deploy React App to Hostinger
 
+# Trigger this workflow on push to the main branch
 on:
   push:
-    branches: [ "master" ]  # Adjust if your primary branch is "master" or another name
+    branches:
+      - master
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
-      # 1) Check out the repo
+      # 1. Check out your GitHub repository
       - name: Check out repository
         uses: actions/checkout@v3
 
-      # 2) Use Node.js 16 (or whichever version your app needs)
-      - name: Set up Node
+      # 2. Set up Node.js
+      - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
           node-version: 16
 
-      # 3) Install dependencies
+      # 3. Install dependencies and build the React app
       - name: Install dependencies
         run: npm install
-
-      # 4) Build the React app
-      - name: Build
+      - name: Build the React app
         run: npm run build
 
-      # 5) Deploy the build folder to Hostinger via FTP
+      # 4. Deploy the build folder to Hostinger via FTP
       - name: FTP Deploy
         uses: SamKirkland/FTP-Deploy-Action@4.3.3
         with:
-          protocol: ftp
           server: ${{ secrets.FTP_HOST }}
-          port: 21
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           local-dir: build
           server-dir: public_html
-          force-upload: true  # This ensures all files are uploaded even if they appear unchanged
+          force-upload: true
