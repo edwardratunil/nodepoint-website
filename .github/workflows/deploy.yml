@@ -2,7 +2,8 @@ name: Deploy React App to Hostinger
 
 on:
   push:
-    branches: [ "master" ]  # Adjust if your branch name is different
+    branches:
+      - master  # Replace with your branch name if different
 
 jobs:
   build-and-deploy:
@@ -35,6 +36,6 @@ jobs:
           server: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
-          local-dir: build
+          port: 21
+          local-dir: build/           # Note the trailing slash
           server-dir: public_html
-          force-upload: true
