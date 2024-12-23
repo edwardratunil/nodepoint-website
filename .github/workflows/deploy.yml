@@ -2,7 +2,7 @@ name: Deploy React App to Hostinger
 
 on:
   push:
-    branches: [ "main" ]  # Adjust if your primary branch is "master" or another name
+    branches: [ "master" ]  # Adjust if your primary branch is "master" or another name
 
 jobs:
   build-and-deploy:
